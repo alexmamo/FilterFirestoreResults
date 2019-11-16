@@ -1,7 +1,9 @@
 package ro.alexmamo.filterfirestoreresults;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.TextView;
 
@@ -54,7 +56,19 @@ public class ProductsActivity extends AppCompatActivity implements AdapterView.O
     @Override
     public boolean onClose() {
         priceTextView.setText(EMPTY);
+        hideKeyboard();
         return false;
+    }
+
+    private void hideKeyboard() {
+        InputMethodManager inputMethodManager = (InputMethodManager) this.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        View view = this.getCurrentFocus();
+        if (view == null) {
+            view = new View(this);
+        }
+        if (inputMethodManager != null) {
+            inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 
     private void initProductNameListViewModel() {
