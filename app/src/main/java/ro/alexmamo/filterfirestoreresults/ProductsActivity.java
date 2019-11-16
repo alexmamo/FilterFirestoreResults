@@ -50,6 +50,7 @@ public class ProductsActivity extends AppCompatActivity implements AdapterView.O
         productViewModel.getProductPriceLiveData(selectedProductName).observe(this, price -> {
             String priceText = PRICE + price;
             priceTextView.setText(priceText);
+            hideKeyboard();
         });
     }
 
